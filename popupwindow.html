@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        a {
+            color: #000;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #900;
+            text-decoration: underline;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #massage_box {
+            position: absolute;
+            width: 350px;
+            height: 200px;
+            z-index: 2;
+            display: none;
+            /*visibility: hidden; visible*/
+            /*   display: none;   hidden*/
+        }
+
+        #mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #666;
+            z-index: 1;
+            display: none;
+            /*visibility: hidden;*/
+        }
+
+        .massage {
+            border: #036 solid;
+            border-width: 1 1 3 1;
+            width: 95%;
+            height: 95%;
+            background: #fff;
+            color: #036;
+            font-size: 12px;
+            line-height: 150%;
+        }
+
+        .header {
+            background: #036;
+            height: 10%;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            padding: 3 5 0 5;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        function myload()
+        {
+            document.getElementById("massage_box").style.left = (document.body.clientWidth - 350) / 2 + "px";
+            document.getElementById("massage_box").style.top = (document.documentElement.clientHeight - 200) / 2 + "px";
+            document.getElementById("mask").style.width = document.body.scrollWidth + "px";
+            document.getElementById("mask").style.height = document.documentElement.clientHeight + "px";
+
+
+            document.getElementById("mydown").onmousedown = MDown;
+        }
+
+        var Obj = "";
+        document.onmouseup = MUp;
+        document.onmousemove = MMove;
+
+        function MDown(e) {
+            Obj = "massage_box";
+            var oldleft = document.getElementById(Obj).style.left;
+            var oldtop = document.getElementById(Obj).style.top;
+            if (window.navigator.userAgent.indexOf("Firefox") > 0 || window.navigator.userAgent.indexOf("Chrome") > 0)
+            {
+                pX = e.pageX - parseInt(oldleft.substring(0,oldleft.indexOf("px")));
+                pY = e.pageY - parseInt(oldtop.substring(0,oldtop.indexOf("px")));
+            }
+            else
+            {
+                pX = window.event.x - parseInt(oldleft.substring(0,oldleft.indexOf("px")));
+                pY = window.event.y - parseInt(oldtop.substring(0,oldtop.indexOf("px")));
+            }
+        }
+
+        function MMove(e) {
+            if (Obj != "") {
+                if (window.navigator.userAgent.indexOf("Firefox") > 0 || window.navigator.userAgent.indexOf("Chrome") > 0)
+                {
+                    document.getElementById(Obj).style.left = (e.pageX - pX)+"px";
+                    document.getElementById(Obj).style.top = (e.pageY - pY) + "px";
+                }
+                else
+                {
+                    document.getElementById(Obj).style.left = window.event.x - pX;
+                    document.getElementById(Obj).style.top = window.event.y - pY;
+                }
+            }
+        }
+
+        function MUp() {
+            if (Obj != "") {
+                Obj = "";
+            }
+        }
+    </script>
+</head>
+<body onload="myload();">
+    <div id="massage_box">
+        <div class="massage">
+            <div class="header" id="mydown">
+                <div style="display: inline; width: 150px; position: absolute">
+                </div>
+                <span onclick="massage_box.style.display='none'; mask.style.display='none'"
+                          style="float: right; display: block; cursor: hand">X</span></div>
+            <ul style="margin-right: 25">
+                <li><a>点我啊!!</a>
+                </li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div id="mask">
+    </div>
+
+    <span onclick="mask.style.display='block';massage_box.style.display='block'"
+              style="cursor: hand;"><a href="#">xxxxxxx</a></span>
+</body>
+</html>
