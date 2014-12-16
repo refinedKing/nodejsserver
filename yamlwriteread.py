@@ -25,7 +25,6 @@ class MagicDict(dict):
 
 d = MagicDict()
 d.version = c
-print d
 
 stream = file('document.yaml', 'w')
-yaml.dump(versionlist, stream)
+yaml.dump(d, stream)
