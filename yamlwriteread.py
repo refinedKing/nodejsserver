@@ -3,8 +3,8 @@ import os
 # easy_install pyyaml
 import yaml
 
-yaml = open('version.sls')
-versionlist = yaml.load(yaml)
+version = open('version.sls')
+versionlist = yaml.load(version)
 
 c = [ j for i in os.listdir('../../salt/files') for j in versionlist['version'] if str(i).__contains__(j) ]
 a = list(set(c))
@@ -27,4 +27,4 @@ d = MagicDict()
 d.version = c
 
 stream = file('document.yaml', 'w')
-yaml.dump(d, stream)
+yaml.dump(dict(d), stream, default_flow_style=False)
