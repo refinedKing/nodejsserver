@@ -1,3 +1,4 @@
+# IPython\core\completer.py
 def attr_matches(self, text):
     """Compute matches when text contains a dot.
 
