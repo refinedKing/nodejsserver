@@ -1,4 +1,4 @@
 script
 ============
 
-记录javascript与python的成长
+临时用的脚本 js,py,shell都会有
